@@ -50,12 +50,24 @@
             <span class="price">от {{ content.price }} </span>
             <div class="square">S {{ content.square }} м2</div>
           </div>
-          <router-link :to="{ name: 'project', params: { id: content.id }, query: {content: content}}">
-            <button class="other-button">
+          <router-link :to="{ name: 'project', params: { id: content.id } }">
+            <button
+              class="other-button"
+              @click="saveContent(content)"
+              @mouseover="hovered = true"
+              @mouseout="hovered = false"
+            >
               <span> подробнее о проекте </span>
               <img
+                v-if="!hovered"
                 class="arrow-right"
                 src="@/assets/icons/arrow-right.svg"
+                alt=">"
+              />
+              <img
+                v-else
+                class="arrow-right"
+                src="@/assets/icons/arrow-right-dark.svg"
                 alt=">"
               />
             </button>
@@ -108,88 +120,13 @@ export default {
   },
   data() {
     return {
-      slidesContent: [
-        {
-          name: "Икс-Рей",
-          descr:
-            "Проект коттеджа для круглогодичного проживания выполненный в современном стиле Модерн",
-          background:
-            "https://berezhnodom.ru/upload/iblock/64c/64c03035e75ad3201b43f13b72401c7e.jpg",
-          price: "5.8 млн Р",
-          square: 354,
-          id: "project-1",
-        },
-        {
-          name: "Супер проект",
-          descr:
-            "Проект коттеджа для круглогодичного проживания выполненный в современном стиле Модерн 2",
-          background:
-            "https://berezhnodom.ru/upload/iblock/39b/39b8558d62857da99da59fe57961ea74.jpg",
-          price: "3.8 млн Р",
-          square: 234,
-          id: "project-2",
-        },
-        {
-          name: "Икс-Рей 3",
-          descr:
-            "Проект коттеджа для круглогодичного проживания выполненный в современном стиле Модерн 3",
-          background:
-            "https://berezhnodom.ru/upload/iblock/6c9/6c9538ae1202a37e3225064f80e6d09d.jpg",
-          price: "4.8 млн Р",
-          square: 546,
-          id: "project-3",
-        },
-        {
-          name: "Икс-Рей 4",
-          descr:
-            "Проект коттеджа для круглогодичного проживания выполненный в современном стиле Модерн 4",
-          background: "https://swiperjs.com/demos/images/nature-4.jpg",
-          price: "6.8 млн Р",
-          square: 123,
-          id: "project-4",
-        },
-        {
-          name: "Икс-Рей 5",
-          descr:
-            "Проект коттеджа для круглогодичного проживания выполненный в современном стиле Модерн 5",
-          background: "https://swiperjs.com/demos/images/nature-5.jpg",
-          price: "5.8 млн Р",
-          square: 321,
-          id: "project-5",
-        },
-        {
-          name: "Икс-Рей 6",
-          descr:
-            "Проект коттеджа для круглогодичного проживания выполненный в современном стиле Модерн 6",
-          background: "https://swiperjs.com/demos/images/nature-6.jpg",
-          price: "5.8 млн Р",
-          square: 354,
-          id: "project-6",
-        },
-        {
-          name: "Икс-Рей 7",
-          descr:
-            "Проект коттеджа для круглогодичного проживания выполненный в современном стиле Модерн 7",
-          background: "https://swiperjs.com/demos/images/nature-7.jpg",
-          price: "5.8 млн Р",
-          square: 354,
-          id: "project-7",
-        },
-        {
-          name: "Икс-Рей 8",
-          descr:
-            "Проект коттеджа для круглогодичного проживания выполненный в современном стиле Модерн 8",
-          background: "https://swiperjs.com/demos/images/nature-8.jpg",
-          price: "5.8 млн Р",
-          square: 354,
-          id: "project-8",
-        },
-      ],
+      slidesContent: this.$store.state.projectsContent,
+      hovered: false,
     };
   },
   methods: {
-    renderBull(index, className) {
-      return `<span class="${className}" data-index="${index}">${this.slidesContent[index].name}</span>`;
+    saveContent(content) {
+      localStorage.setItem("content", JSON.stringify(content));
     },
   },
   mounted() {
@@ -281,9 +218,10 @@ body {
   width: 100%;
   height: 100%;
   transition-duration: 1000ms;
-  z-index: -10;
+  transition-property: opacity;
+  // z-index: -10;
   &-active {
-    z-index: 0;
+    z-index: 1;
   }
 }
 

@@ -1,66 +1,114 @@
 <template>
-  <swiper
-    effect="fade"
-    :grabCursor="false"
-    :centeredSlides="false"
-    :slidesPerView="1"
-    direction="vertical"
-    :loop="false"
-    :speed="800"
-    :clickable="true"
-    mousewheel
-    :navigation="{
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    }"
-    :pagination="{ clickable: true, el: '.swiper-pagination' }"
-    :scrollbar="{ hide: false, el: '.swiper-scrollbar' }"
-  >
-    <div class="swiper-button-prev">
-      <span class="arrow-up"
-        ><img src="@/assets/icons/arrow-up.svg" alt="<"
-      /></span>
-    </div>
-    <div class="swiper-button-next">
-      <span class="arrow-down"
-        ><img src="@/assets/icons/arrow-down.svg" alt=">"
-      /></span>
-    </div>
-    <div class="swiper-pagination"></div>
-    <div class="swiper-scrollbar"></div>
-    <swiper-slide
-      v-for="(content, index) in slidesContent"
-      :data-title="content.name"
-      :key="index"
-    >
-      <div class="darknes">
-        <div
-          class="background"
-          :style="`background-image: url(${query.content.background});`"
-        ></div>
+  <div class="project-page">
+    <div class="info-block">
+      <div class="main-info">
+        <button type="button" class="button-back">
+          <img src="@/assets/icons/arrow-left.svg" alt="" />вернуться назад
+        </button>
+        <h3 class="main-info-title">{{ content.name }}</h3>
+        <p class="main-info-descr">{{ content.descr }}</p>
+        <span class="main-info-price">{{ content.fullPrice }} ₽</span>
       </div>
-      <div class="slider-content">
-        <div class="slider-content__wrapper">
-          <h2>{{ query.content.name }}</h2>
-          <p>
-            {{ query.content.descr }}
-          </p>
-          <div class="other-info">
-            <span class="price">от {{ query.content.price }} </span>
-            <div class="square">S {{ query.content.square }} м2</div>
+      <div class="parameters">
+        <span class="parameters-title"></span>
+        <div class="parameters-block">
+          <div class="parameters-block-item">
+            <img src="@/assets/icons/total-area-icon.svg" alt="!" />
+            <div class="parameters-block-text">
+              <span class="parameters-block-value">
+                {{ content.totalArea }} м2
+              </span>
+              <span class="parameters-block-parameter">Общая площадь</span>
+            </div>
           </div>
-          <router-link :to="{ name: 'project', params: { id: query.content.id }}">
-            <button class="other-button">
-              <span> подробнее о проекте </span>
-              <img
-                class="arrow-right"
-                src="@/assets/icons/arrow-right.svg"
-                alt=">"
-              />
-            </button>
-          </router-link>
+          <div class="parameters-block-item">
+            <img src="@/assets/icons/living-area-icon.svg" alt="!" />
+            <div class="parameters-block-text">
+              <span class="parameters-block-value">
+                {{ content.livingArea }} м2
+              </span>
+              <span class="parameters-block-parameter">Жилая площадь</span>
+            </div>
+          </div>
+          <div class="parameters-block-item">
+            <img src="@/assets/icons/floors-icon.svg" alt="!" />
+            <div class="parameters-block-text">
+              <span class="parameters-block-value"> {{ content.floors }} </span>
+              <span class="parameters-block-parameter">Этажи</span>
+            </div>
+          </div>
+          <div class="parameters-block-item">
+            <img src="@/assets/icons/bathroom-icon.svg" alt="!" />
+            <div class="parameters-block-text">
+              <span class="parameters-block-value">
+                {{ content.bathrooms }}
+              </span>
+              <span class="parameters-block-parameter">Ванные комнаты</span>
+            </div>
+          </div>
+          <div class="parameters-block-item">
+            <img src="@/assets/icons/terrace-icon.svg" alt="!" />
+            <div class="parameters-block-text">
+              <span class="parameters-block-value">
+                {{ content.terraces }}
+              </span>
+              <span class="parameters-block-parameter">Террасы</span>
+            </div>
+          </div>
+          <div class="parameters-block-item">
+            <img src="@/assets/icons/water-icon.svg" alt="!" />
+            <div class="parameters-block-text">
+              <span class="parameters-block-value"> {{ content.pools }} </span>
+              <span class="parameters-block-parameter">Бассейны</span>
+            </div>
+          </div>
         </div>
       </div>
-    </swiper-slide>
-  </swiper>
+    </div>
+    <div class="gallery-block"></div>
+  </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      content: this.getContent(),
+    };
+  },
+  methods: {
+    getContent() {
+      return JSON.parse(localStorage.getItem("content"));
+    },
+  },
+  mounted() {},
+};
+</script>
+<style lang="scss">
+.project-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  .info-block {
+    width: 40%;
+    height: 100%;
+    background: white;
+  }
+  .parameters {
+    height: 55%;
+    &-block {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: repeat(3, 1fr);
+    }
+  }
+  .main-info{
+    height: 45%;
+  }
+}
+.gallery-block {
+  width: 60%;
+  height: 100%;
+  background: grey;
+}
+</style>
