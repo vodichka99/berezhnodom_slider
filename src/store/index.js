@@ -18,7 +18,21 @@ export default createStore({
         floors: 3,
         bathrooms: 2,
         terraces: 2,
-        pools: 1
+        pools: 1,
+        gallery: [
+          "https://berezhnodom.ru/upload/iblock/64c/64c03035e75ad3201b43f13b72401c7e.jpg",
+          "https://berezhnodom.ru/upload/iblock/39b/39b8558d62857da99da59fe57961ea74.jpg",
+          "https://berezhnodom.ru/upload/iblock/6c9/6c9538ae1202a37e3225064f80e6d09d.jpg",
+          "https://berezhnodom.ru/upload/iblock/64c/64c03035e75ad3201b43f13b72401c7e.jpg",
+          "https://berezhnodom.ru/upload/iblock/39b/39b8558d62857da99da59fe57961ea74.jpg",
+          "https://berezhnodom.ru/upload/iblock/6c9/6c9538ae1202a37e3225064f80e6d09d.jpg",
+        ],
+        layout: [
+          'https://img.landandplan.com/full/113cd1bd22a870ad.jpeg',
+          'https://img.landandplan.com/full/0769f0bc5f87a5c3.jpeg',
+          'https://img.landandplan.com/full/113cd1bd22a870ad.jpeg',
+          'https://img.landandplan.com/full/0769f0bc5f87a5c3.jpeg',
+        ]
       },
       {
         name: "Супер проект",
@@ -35,7 +49,21 @@ export default createStore({
         floors: 3,
         bathrooms: 2,
         terraces: 2,
-        pools: 1
+        pools: 1,
+        gallery: [
+          "https://berezhnodom.ru/upload/iblock/64c/64c03035e75ad3201b43f13b72401c7e.jpg",
+          "https://berezhnodom.ru/upload/iblock/39b/39b8558d62857da99da59fe57961ea74.jpg",
+          "https://berezhnodom.ru/upload/iblock/6c9/6c9538ae1202a37e3225064f80e6d09d.jpg",
+          "https://berezhnodom.ru/upload/iblock/64c/64c03035e75ad3201b43f13b72401c7e.jpg",
+          "https://berezhnodom.ru/upload/iblock/39b/39b8558d62857da99da59fe57961ea74.jpg",
+          "https://berezhnodom.ru/upload/iblock/6c9/6c9538ae1202a37e3225064f80e6d09d.jpg",
+        ],
+        layout: [
+          'https://img.landandplan.com/full/113cd1bd22a870ad.jpeg',
+          'https://img.landandplan.com/full/0769f0bc5f87a5c3.jpeg',
+          'https://img.landandplan.com/full/113cd1bd22a870ad.jpeg',
+          'https://img.landandplan.com/full/0769f0bc5f87a5c3.jpeg',
+        ]
       },
       {
         name: "Икс-Рей 3",
@@ -52,7 +80,21 @@ export default createStore({
         floors: 3,
         bathrooms: 2,
         terraces: 2,
-        pools: 1
+        pools: 1,
+        gallery: [
+          "https://berezhnodom.ru/upload/iblock/64c/64c03035e75ad3201b43f13b72401c7e.jpg",
+          "https://berezhnodom.ru/upload/iblock/39b/39b8558d62857da99da59fe57961ea74.jpg",
+          "https://berezhnodom.ru/upload/iblock/6c9/6c9538ae1202a37e3225064f80e6d09d.jpg",
+          "https://berezhnodom.ru/upload/iblock/64c/64c03035e75ad3201b43f13b72401c7e.jpg",
+          "https://berezhnodom.ru/upload/iblock/39b/39b8558d62857da99da59fe57961ea74.jpg",
+          "https://berezhnodom.ru/upload/iblock/6c9/6c9538ae1202a37e3225064f80e6d09d.jpg",
+        ],
+        layout: [
+          'https://img.landandplan.com/full/113cd1bd22a870ad.jpeg',
+          'https://img.landandplan.com/full/0769f0bc5f87a5c3.jpeg',
+          'https://img.landandplan.com/full/113cd1bd22a870ad.jpeg',
+          'https://img.landandplan.com/full/0769f0bc5f87a5c3.jpeg',
+        ]
       },
       {
         name: "Икс-Рей 4",
@@ -68,7 +110,21 @@ export default createStore({
         floors: 3,
         bathrooms: 2,
         terraces: 2,
-        pools: 1
+        pools: 1,
+        gallery: [
+          "https://berezhnodom.ru/upload/iblock/64c/64c03035e75ad3201b43f13b72401c7e.jpg",
+          "https://berezhnodom.ru/upload/iblock/39b/39b8558d62857da99da59fe57961ea74.jpg",
+          "https://berezhnodom.ru/upload/iblock/6c9/6c9538ae1202a37e3225064f80e6d09d.jpg",
+          "https://berezhnodom.ru/upload/iblock/64c/64c03035e75ad3201b43f13b72401c7e.jpg",
+          "https://berezhnodom.ru/upload/iblock/39b/39b8558d62857da99da59fe57961ea74.jpg",
+          "https://berezhnodom.ru/upload/iblock/6c9/6c9538ae1202a37e3225064f80e6d09d.jpg",
+        ],
+        layout: [
+          'https://img.landandplan.com/full/113cd1bd22a870ad.jpeg',
+          'https://img.landandplan.com/full/0769f0bc5f87a5c3.jpeg',
+          'https://img.landandplan.com/full/113cd1bd22a870ad.jpeg',
+          'https://img.landandplan.com/full/0769f0bc5f87a5c3.jpeg',
+        ]
       },
       {
         name: "Икс-Рей 5",
@@ -84,7 +140,21 @@ export default createStore({
         floors: 3,
         bathrooms: 2,
         terraces: 2,
-        pools: 1
+        pools: 1,
+        gallery: [
+          "https://berezhnodom.ru/upload/iblock/64c/64c03035e75ad3201b43f13b72401c7e.jpg",
+          "https://berezhnodom.ru/upload/iblock/39b/39b8558d62857da99da59fe57961ea74.jpg",
+          "https://berezhnodom.ru/upload/iblock/6c9/6c9538ae1202a37e3225064f80e6d09d.jpg",
+          "https://berezhnodom.ru/upload/iblock/64c/64c03035e75ad3201b43f13b72401c7e.jpg",
+          "https://berezhnodom.ru/upload/iblock/39b/39b8558d62857da99da59fe57961ea74.jpg",
+          "https://berezhnodom.ru/upload/iblock/6c9/6c9538ae1202a37e3225064f80e6d09d.jpg",
+        ],
+        layout: [
+          'https://img.landandplan.com/full/113cd1bd22a870ad.jpeg',
+          'https://img.landandplan.com/full/0769f0bc5f87a5c3.jpeg',
+          'https://img.landandplan.com/full/113cd1bd22a870ad.jpeg',
+          'https://img.landandplan.com/full/0769f0bc5f87a5c3.jpeg',
+        ]
       },
       {
         name: "Икс-Рей 6",
@@ -100,7 +170,21 @@ export default createStore({
         floors: 3,
         bathrooms: 2,
         terraces: 2,
-        pools: 1
+        pools: 1,
+        gallery: [
+          "https://berezhnodom.ru/upload/iblock/64c/64c03035e75ad3201b43f13b72401c7e.jpg",
+          "https://berezhnodom.ru/upload/iblock/39b/39b8558d62857da99da59fe57961ea74.jpg",
+          "https://berezhnodom.ru/upload/iblock/6c9/6c9538ae1202a37e3225064f80e6d09d.jpg",
+          "https://berezhnodom.ru/upload/iblock/64c/64c03035e75ad3201b43f13b72401c7e.jpg",
+          "https://berezhnodom.ru/upload/iblock/39b/39b8558d62857da99da59fe57961ea74.jpg",
+          "https://berezhnodom.ru/upload/iblock/6c9/6c9538ae1202a37e3225064f80e6d09d.jpg",
+        ],
+        layout: [
+          'https://img.landandplan.com/full/113cd1bd22a870ad.jpeg',
+          'https://img.landandplan.com/full/0769f0bc5f87a5c3.jpeg',
+          'https://img.landandplan.com/full/113cd1bd22a870ad.jpeg',
+          'https://img.landandplan.com/full/0769f0bc5f87a5c3.jpeg',
+        ]
       },
       {
         name: "Икс-Рей 7",
@@ -116,7 +200,21 @@ export default createStore({
         floors: 3,
         bathrooms: 2,
         terraces: 2,
-        pools: 1
+        pools: 1,
+        gallery: [
+          "https://berezhnodom.ru/upload/iblock/64c/64c03035e75ad3201b43f13b72401c7e.jpg",
+          "https://berezhnodom.ru/upload/iblock/39b/39b8558d62857da99da59fe57961ea74.jpg",
+          "https://berezhnodom.ru/upload/iblock/6c9/6c9538ae1202a37e3225064f80e6d09d.jpg",
+          "https://berezhnodom.ru/upload/iblock/64c/64c03035e75ad3201b43f13b72401c7e.jpg",
+          "https://berezhnodom.ru/upload/iblock/39b/39b8558d62857da99da59fe57961ea74.jpg",
+          "https://berezhnodom.ru/upload/iblock/6c9/6c9538ae1202a37e3225064f80e6d09d.jpg",
+        ],
+        layout: [
+          'https://img.landandplan.com/full/113cd1bd22a870ad.jpeg',
+          'https://img.landandplan.com/full/0769f0bc5f87a5c3.jpeg',
+          'https://img.landandplan.com/full/113cd1bd22a870ad.jpeg',
+          'https://img.landandplan.com/full/0769f0bc5f87a5c3.jpeg',
+        ]
       },
       {
         name: "Икс-Рей 8",
@@ -132,7 +230,21 @@ export default createStore({
         floors: 3,
         bathrooms: 2,
         terraces: 2,
-        pools: 1
+        pools: 1,
+        gallery: [
+          "https://berezhnodom.ru/upload/iblock/64c/64c03035e75ad3201b43f13b72401c7e.jpg",
+          "https://berezhnodom.ru/upload/iblock/39b/39b8558d62857da99da59fe57961ea74.jpg",
+          "https://berezhnodom.ru/upload/iblock/6c9/6c9538ae1202a37e3225064f80e6d09d.jpg",
+          "https://berezhnodom.ru/upload/iblock/64c/64c03035e75ad3201b43f13b72401c7e.jpg",
+          "https://berezhnodom.ru/upload/iblock/39b/39b8558d62857da99da59fe57961ea74.jpg",
+          "https://berezhnodom.ru/upload/iblock/6c9/6c9538ae1202a37e3225064f80e6d09d.jpg",
+        ],
+        layout: [
+          'https://img.landandplan.com/full/113cd1bd22a870ad.jpeg',
+          'https://img.landandplan.com/full/0769f0bc5f87a5c3.jpeg',
+          'https://img.landandplan.com/full/113cd1bd22a870ad.jpeg',
+          'https://img.landandplan.com/full/0769f0bc5f87a5c3.jpeg',
+        ]
       },
     ],
   },

@@ -173,6 +173,7 @@ body {
   padding: 0;
   font-family: "geometria";
   color: white;
+  box-sizing: border-box;
 }
 a {
   text-decoration: none;
@@ -208,8 +209,6 @@ body {
 .swiper-container {
   width: 100%;
   height: 100%;
-  /*padding-top: 50px;
-        padding-bottom: 50px;*/
 }
 
 .swiper-slide {
@@ -219,7 +218,9 @@ body {
   height: 100%;
   transition-duration: 1000ms;
   transition-property: opacity;
-  // z-index: -10;
+  &-prev{
+    opacity: 0 !important;
+  }
   &-active {
     z-index: 1;
   }
@@ -260,13 +261,13 @@ body {
 }
 
 .swiper-container-vertical > .swiper-pagination-bullets {
-  top: 60%;
+  top: 50%;
   right: auto;
 }
 .swiper-pagination {
   height: 60%;
   right: 0;
-  left: 70px;
+  left: 100px;
   z-index: 9999;
   display: flex;
   flex-direction: column;
@@ -299,9 +300,9 @@ body {
 
 .swiper-container-vertical > .swiper-scrollbar {
   right: auto;
-  left: 40px;
+  left: 60px;
   height: 60%;
-  top: 60%;
+  top: 50%;
   transform: translateY(-50%);
   width: 2px;
 }
@@ -365,15 +366,15 @@ body {
 }
 .swiper-button-next {
   left: auto;
-  right: 40px;
+  right: 60px;
   background: #000000 !important;
   top: 53%;
 }
 
 .swiper-button-prev {
-  top: 40%;
+  top: 44%;
   left: auto;
-  right: 40px;
+  right: 60px;
 }
 
 .swiper-button-next,
