@@ -27,7 +27,7 @@
         ><img src="@/assets/icons/arrow-down.svg" alt=">"
       /></span>
     </div>
-    <div class="swiper-pagination"></div>
+    <div class="swiper-pagination" ref='pagination'></div>
     <div class="swiper-scrollbar"></div>
     <swiper-slide
       v-for="(content, index) in slidesContent"
@@ -130,10 +130,7 @@ export default {
     },
   },
   mounted() {
-    const paginationBullets = document.querySelectorAll(
-      ".swiper-pagination-bullet"
-    );
-    paginationBullets.forEach((item, index) => {
+    this.$refs.pagination.childNodes.forEach((item, index) => {
       item.innerHTML = this.slidesContent[index].name;
     });
   },
@@ -218,7 +215,7 @@ body {
   height: 100%;
   transition-duration: 1000ms;
   transition-property: opacity;
-  &-prev{
+  &-prev {
     opacity: 0 !important;
   }
   &-active {
