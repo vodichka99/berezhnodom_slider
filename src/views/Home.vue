@@ -27,7 +27,7 @@
         ><img src="@/assets/icons/arrow-down.svg" alt=">"
       /></span>
     </div>
-    <div class="swiper-pagination" ref='pagination'></div>
+    <div class="swiper-pagination" ref="pagination"></div>
     <div class="swiper-scrollbar"></div>
     <swiper-slide
       v-for="(content, index) in slidesContent"
@@ -41,7 +41,7 @@
         ></div>
       </div>
       <div class="slider-content">
-        <div class="slider-content__wrapper">
+        <div class="slider-content-wrapper">
           <h2>{{ content.name }}</h2>
           <p>
             {{ content.descr }}
@@ -50,7 +50,10 @@
             <span class="price">от {{ content.price }} </span>
             <div class="square">S {{ content.square }} м2</div>
           </div>
-          <router-link :to="{ name: 'project', params: { id: content.id } }">
+          <router-link
+            class="about-link"
+            :to="{ name: 'project', params: { id: content.id } }"
+          >
             <button
               class="other-button"
               @click="saveContent(content)"
@@ -58,6 +61,26 @@
               @mouseout="hovered = false"
             >
               <span> подробнее о проекте </span>
+              <img
+                v-if="!hovered"
+                class="arrow-right"
+                src="@/assets/icons/arrow-right.svg"
+                alt=">"
+              />
+              <img
+                v-else
+                class="arrow-right"
+                src="@/assets/icons/arrow-right-dark.svg"
+                alt=">"
+              />
+            </button>
+          </router-link>
+          <router-link
+            class="about-link-mobile"
+            :to="{ name: 'project', params: { id: content.id } }"
+          >
+            <button class="other-button" @click="saveContent(content)">
+              <span> подробнее </span>
               <img
                 v-if="!hovered"
                 class="arrow-right"
@@ -97,10 +120,6 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 
 // Import Swiper styles
 import "swiper/swiper.scss";
-// import "swiper/components/navigation/navigation.scss";
-// import "swiper/components/pagination/pagination.scss";
-// import "swiper/components/scrollbar/scrollbar.scss";
-
 
 // install Swiper modules
 SwiperCore.use([
@@ -113,6 +132,11 @@ SwiperCore.use([
 ]);
 
 export default {
+  props: {
+    mobile: {
+      type: Boolean,
+    },
+  },
   components: {
     Swiper,
     SwiperSlide,
@@ -139,267 +163,7 @@ export default {
 </script>
 
 <style lang="scss">
-$themeColor: #007aff !default;
-$colors: (
-  'white': #ffffff,
-  'black': #000000,
-) !default;
-
-
-:root {
-  --swiper-navigation-size: 44px;
-  /*
-  --swiper-navigation-color: var(--swiper-theme-color);
-  */
-}
-.swiper-button-prev,
-.swiper-button-next {
-  position: absolute;
-  top: 50%;
-  width: calc(var(--swiper-navigation-size) / 44 * 27);
-  height: var(--swiper-navigation-size);
-  margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
-  z-index: 10;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--swiper-navigation-color, var(--swiper-theme-color));
-  &.swiper-button-disabled {
-    opacity: 0.35;
-    cursor: auto;
-    pointer-events: none;
-  }
-  &:after {
-    font-family: swiper-icons;
-    font-size: var(--swiper-navigation-size);
-    text-transform: none !important;
-    letter-spacing: 0;
-    text-transform: none;
-    font-variant: initial;
-    line-height: 1;
-  }
-}
-.swiper-button-prev,
-.swiper-container-rtl .swiper-button-next {
-  &:after {
-    content: 'prev';
-  }
-  left: 10px;
-  right: auto;
-}
-.swiper-button-next,
-.swiper-container-rtl .swiper-button-prev {
-  &:after {
-    content: 'next';
-  }
-  right: 10px;
-  left: auto;
-}
-
-@each $navColorName, $navColorValue in $colors {
-  .swiper-button-prev,
-  .swiper-button-next {
-    &.swiper-button-#{'' + $navColorName} {
-      --swiper-navigation-color: #{'' + $navColorValue};
-    }
-  }
-}
-.swiper-button-lock {
-  display: none;
-}
-
-:root {
-  /*
-  --swiper-pagination-color: var(--swiper-theme-color);
-  */
-}
-.swiper-pagination {
-  position: absolute;
-  text-align: center;
-  transition: 300ms opacity;
-  transform: translate3d(0, 0, 0);
-  z-index: 10;
-  &.swiper-pagination-hidden {
-    opacity: 0;
-  }
-}
-/* Common Styles */
-.swiper-pagination-fraction,
-.swiper-pagination-custom,
-.swiper-container-horizontal > .swiper-pagination-bullets {
-  bottom: 10px;
-  left: 0;
-  width: 100%;
-}
-/* Bullets */
-.swiper-pagination-bullets-dynamic {
-  overflow: hidden;
-  font-size: 0;
-  .swiper-pagination-bullet {
-    transform: scale(0.33);
-    position: relative;
-  }
-  .swiper-pagination-bullet-active {
-    transform: scale(1);
-  }
-  .swiper-pagination-bullet-active-main {
-    transform: scale(1);
-  }
-  .swiper-pagination-bullet-active-prev {
-    transform: scale(0.66);
-  }
-  .swiper-pagination-bullet-active-prev-prev {
-    transform: scale(0.33);
-  }
-  .swiper-pagination-bullet-active-next {
-    transform: scale(0.66);
-  }
-  .swiper-pagination-bullet-active-next-next {
-    transform: scale(0.33);
-  }
-}
-.swiper-pagination-bullet {
-  width: 8px;
-  height: 8px;
-  display: inline-block;
-  border-radius: 50%;
-  background: #000;
-  opacity: 0.2;
-  @at-root button#{&} {
-    border: none;
-    margin: 0;
-    padding: 0;
-    box-shadow: none;
-    appearance: none;
-  }
-  .swiper-pagination-clickable & {
-    cursor: pointer;
-  }
-}
-.swiper-pagination-bullet-active {
-  opacity: 1;
-  background: var(--swiper-pagination-color, var(--swiper-theme-color));
-}
-
-.swiper-container-vertical {
-  > .swiper-pagination-bullets {
-    right: 10px;
-    top: 50%;
-    transform: translate3d(0px, -50%, 0);
-    .swiper-pagination-bullet {
-      margin: 6px 0;
-      display: block;
-    }
-    &.swiper-pagination-bullets-dynamic {
-      top: 50%;
-      transform: translateY(-50%);
-      width: 8px;
-      .swiper-pagination-bullet {
-        display: inline-block;
-        transition: 200ms transform, 200ms top;
-      }
-    }
-  }
-}
-.swiper-container-horizontal {
-  > .swiper-pagination-bullets {
-    .swiper-pagination-bullet {
-      margin: 0 4px;
-    }
-    &.swiper-pagination-bullets-dynamic {
-      left: 50%;
-      transform: translateX(-50%);
-      white-space: nowrap;
-      .swiper-pagination-bullet {
-        transition: 200ms transform, 200ms left;
-      }
-    }
-  }
-  &.swiper-container-rtl > .swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
-    transition: 200ms transform, 200ms right;
-  }
-}
-/* Progress */
-.swiper-pagination-progressbar {
-  background: rgba(0, 0, 0, 0.25);
-  position: absolute;
-  .swiper-pagination-progressbar-fill {
-    background: var(--swiper-pagination-color, var(--swiper-theme-color));
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    transform: scale(0);
-    transform-origin: left top;
-  }
-  .swiper-container-rtl & .swiper-pagination-progressbar-fill {
-    transform-origin: right top;
-  }
-  .swiper-container-horizontal > &,
-  .swiper-container-vertical > &.swiper-pagination-progressbar-opposite {
-    width: 100%;
-    height: 4px;
-    left: 0;
-    top: 0;
-  }
-  .swiper-container-vertical > &,
-  .swiper-container-horizontal > &.swiper-pagination-progressbar-opposite {
-    width: 4px;
-    height: 100%;
-    left: 0;
-    top: 0;
-  }
-}
-@each $paginationColorName, $paginationColorValue in $colors {
-  .swiper-pagination-#{'' + $paginationColorName} {
-    --swiper-pagination-color: #{'' + $paginationColorValue};
-  }
-}
-.swiper-pagination-lock {
-  display: none;
-}
-
-/* Scrollbar */
-.swiper-scrollbar {
-  border-radius: 10px;
-  position: relative;
-  -ms-touch-action: none;
-  background: rgba(0, 0, 0, 0.1);
-  .swiper-container-horizontal > & {
-    position: absolute;
-    left: 1%;
-    bottom: 3px;
-    z-index: 50;
-    height: 5px;
-    width: 98%;
-  }
-  .swiper-container-vertical > & {
-    position: absolute;
-    right: 3px;
-    top: 1%;
-    z-index: 50;
-    width: 5px;
-    height: 98%;
-  }
-}
-.swiper-scrollbar-drag {
-  height: 100%;
-  width: 100%;
-  position: relative;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-  left: 0;
-  top: 0;
-}
-.swiper-scrollbar-cursor-drag {
-  cursor: move;
-}
-.swiper-scrollbar-lock {
-  display: none;
-}
-
+@import '@/assets/style/swiper.scss';
 
 @font-face {
   font-family: "geometria";
@@ -464,7 +228,6 @@ body {
 }
 .header {
   width: 100%;
-  height: 38px;
 }
 .swiper-container {
   width: 100%;
@@ -518,11 +281,38 @@ body {
   bottom: 0;
   background-repeat: no-repeat;
   background-size: cover;
+  @media (max-width: 768px) {
+    p {
+      text-align: start;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 18px;
+      width: 100%;
+      margin: 0 !important;
+    }
+    h2 {
+      font-weight: 700;
+      font-size: 40px !important;
+      text-align: start;
+      width: 70%;
+    }
+    &-wrapper {
+      width: 100% !important;
+      margin: 0 50px !important;
+    }
+    .other-info{
+      display: none;
+    }
+    .other-button{
+      margin: 25px 0;
+      padding: 0;
+    }
+  }
 }
 
 .swiper-container-vertical > .swiper-pagination-bullets {
-  top: 50%  !important;
-  right: auto  !important;
+  top: 50% !important;
+  right: auto !important;
 }
 .swiper-pagination {
   height: 60% !important;
@@ -532,6 +322,9 @@ body {
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-around !important;
+  @media (max-width: 768px) {
+    left: 50px !important;
+  }
 }
 
 .swiper-container-vertical
@@ -565,13 +358,18 @@ body {
   top: 50% !important;
   transform: translateY(-50%) !important;
   width: 2px !important;
+  @media (max-width: 768px) {
+    left: 25px !important;
+    height: 63% !important;
+    top: 290px !important;
+  }
 }
 
 .swiper-scrollbar-drag {
   background-color: white !important;
 }
 
-.slider-content__wrapper {
+.slider-content-wrapper {
   width: 50%;
   margin: auto;
   position: relative;
@@ -581,7 +379,7 @@ body {
   text-align: center;
 }
 
-.slider-content__wrapper > h2 {
+.slider-content-wrapper > h2 {
   color: white;
   padding: 0;
   margin: 10px 0;
@@ -590,7 +388,7 @@ body {
   font-family: "geometria";
   // text-shadow: 2px 4px 3px rgb(0 0 0 / 30%);
 }
-.slider-content__wrapper > p {
+.slider-content-wrapper > p {
   color: white;
   font-size: 18px;
   line-height: 30px;
@@ -644,6 +442,9 @@ body {
   background: #ffffff;
   // transform: rotate(-90deg);
   transition: all 0.3s ease !important;
+  @media (max-width: 768px) {
+    display: none !important;
+  }
 }
 
 .swiper-button-prev:after,
@@ -651,5 +452,23 @@ body {
 .swiper-button-next:after,
 .swiper-container-rtl .swiper-button-prev:after {
   content: none !important;
+}
+.about-link {
+  display: block;
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+.about-link-mobile {
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
+    .other-button {
+      border: none;
+      img {
+        margin-left: 15px;
+      }
+    }
+  }
 }
 </style>
