@@ -43,7 +43,7 @@
             >
           </div>
         </div>
-        <button class="request-button" type="button">Оставить заявку</button>
+        <button class="request-button" type="button" @click="$emit('openModal')" >Оставить заявку</button>
       </div>
       <div class="header-burger" :class="{'close-icon': activeInfo}" @click="activeInfo = !activeInfo">
         <template v-if="!activeInfo">
@@ -99,6 +99,7 @@ button.request-button {
         position: absolute;
         right: 25px;
         top: 25px;
+        cursor: pointer;
       }
       span {
         width: 24px;

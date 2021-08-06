@@ -1,5 +1,16 @@
 <template>
-  <BHeader />
+  <BHeader @openModal="openModal" />
+  <div class="request-modal-background" v-show="modalActive"></div>
+  <div class="request-modal" v-show="modalActive">
+    <div class="request-modal-close" @click="modalActive = false">
+      <img src="@/assets/icons/close-icon.svg" alt="" />
+    </div>
+    <span class="request-modal-title">Заказать звонок</span>
+    <input class="request-modal-phone request-modal-input" placeholder="НОМЕР ТЕЛЕФОНА" />
+    <input type="email" class="request-modal-email request-modal-input" placeholder="ЭЛЕКТРОННАЯ ПОЧТА" />
+    <textarea class="request-modal-text request-modal-input" placeholder="СООБЩЕНИЕ"></textarea>
+    <button class="request-modal-button">Заказать звонок</button>
+  </div>
   <swiper
     effect="fade"
     :grabCursor="false"
@@ -114,6 +125,7 @@ import SwiperCore, {
   Mousewheel,
 } from "swiper";
 
+// import BModal from "@/components/BModal";
 import BHeader from "@/components/BHeader";
 import BFooter from "@/components/BFooter";
 
@@ -139,15 +151,25 @@ export default {
     SwiperSlide,
     BHeader,
     BFooter,
+    // BModal
   },
   data() {
     return {
       slidesContent: this.$store.state.projectsContent,
       hovered: false,
-      mobileScreen: false
+      mobileScreen: false,
+      modalActive: false
     };
   },
   methods: {
+    closeModal() {
+      this.modalActive = false
+      console.log(this.modalActive);
+    },
+    openModal() {
+      this.modalActive = true
+      console.log(this.modalActive);
+    },
     saveContent(content) {
       localStorage.setItem("content", JSON.stringify(content));
     },
@@ -237,6 +259,75 @@ export default {
   font-family: "geometria";
   font-weight: 700;
   src: url("../assets/fonts/geometria/Geometria-Bold.ttf") format("truetype");
+}
+.request-modal {
+  box-sizing: border-box;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background-color: white;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+  }
+  &-background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 29;
+    top: 0;
+    background-color: black;
+    opacity: 0.4;
+  }
+  &-button{
+    width: 100%;
+    height: 60px;
+    background-color: #222222;
+    border: none;
+    color: white;
+    text-transform: uppercase;
+    font-family: 'geometria';
+    cursor: pointer;
+  }
+  &-input{
+    box-sizing: border-box;
+    padding-left: 25px;
+    font-size: 11px;
+    margin-top: 20px;
+    border: 1px solid #222;
+    box-shadow: none;
+  }
+  &-phone,
+  &-email{
+    height: 60px;
+    font-family: 'geometria';
+  }
+  &-text{
+    padding-top: 25px;
+    height: 150px;
+    margin-bottom: 20px;
+    font-family: 'geometria';
+  }
+  &-title{
+    width: 100%;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    padding: 10px 0;
+  }
+  &-close{
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    cursor: pointer;
+  }
 }
 #app {
   width: 100%;

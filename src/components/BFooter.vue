@@ -314,6 +314,7 @@ export default {
     position: absolute;
     top: 20px;
     right: 20px;
+    cursor: pointer;
   }
 }
 .d-grid{
