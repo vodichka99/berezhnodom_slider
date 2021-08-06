@@ -16,6 +16,8 @@
     }"
     :pagination="{ clickable: true, el: '.swiper-pagination' }"
     :scrollbar="{ hide: false, el: '.swiper-scrollbar' }"
+    @swiper="onSwiper"
+    @slideChange="onSlideChange"
   >
     <div class="swiper-button-prev">
       <span class="arrow-up"
@@ -147,11 +149,67 @@ export default {
     return {
       slidesContent: this.$store.state.projectsContent,
       hovered: false,
+      mobileScreen: false
     };
   },
   methods: {
     saveContent(content) {
       localStorage.setItem("content", JSON.stringify(content));
+    },
+    onSwiper(swiper) {
+      const bullets = swiper.pagination.bullets;
+      bullets.forEach((item, index) => {
+        const prevBulletIndex = index > 0 ? index - 1 : bullets.length - 1;
+        const nextBulletIndex = index < bullets.length - 1 ? index + 1 : 0;
+        const afterNextBulletIndex =
+          nextBulletIndex < bullets.length - 1 ? nextBulletIndex + 1 : 0;
+        if (item.classList.contains("swiper-pagination-bullet-active")) {
+          bullets[prevBulletIndex].classList.add(
+            "swiper-pagination-bullet-prev"
+          );
+          bullets[nextBulletIndex].classList.add(
+            "swiper-pagination-bullet-next"
+          );
+          bullets[afterNextBulletIndex].classList.add(
+            "swiper-pagination-bullet-afternext"
+          );
+        }
+      });
+    },
+    onSlideChange(swiper) {
+      const bullets = swiper.pagination.bullets;
+      bullets.forEach((item, index) => {
+        const prevBulletIndex = index > 0 ? index - 1 : bullets.length - 1;
+        const nextBulletIndex = index < bullets.length - 1 ? index + 1 : 0;
+        const afterNextBulletIndex =
+          nextBulletIndex < bullets.length - 1 ? nextBulletIndex + 1 : 0;
+        if(index != prevBulletIndex){
+          item.classList.remove('swiper-pagination-bullet-prev')
+        }
+        if(index != nextBulletIndex){
+          item.classList.remove('swiper-pagination-bullet-next')
+        }
+        if(index != afterNextBulletIndex){
+          item.classList.remove('swiper-pagination-bullet-afternext')
+        }
+      })
+      bullets.forEach((item, index) => {
+        const prevBulletIndex = index > 0 ? index - 1 : bullets.length - 1;
+        const nextBulletIndex = index < bullets.length - 1 ? index + 1 : 0;
+        const afterNextBulletIndex =
+          nextBulletIndex < bullets.length - 1 ? nextBulletIndex + 1 : 0;
+        if (item.classList.contains("swiper-pagination-bullet-active")) {
+          bullets[prevBulletIndex].classList.add(
+            "swiper-pagination-bullet-prev"
+          );
+          bullets[nextBulletIndex].classList.add(
+            "swiper-pagination-bullet-next"
+          );
+          bullets[afterNextBulletIndex].classList.add(
+            "swiper-pagination-bullet-afternext"
+          );
+        }
+      });
     },
   },
   mounted() {
@@ -163,7 +221,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/style/swiper.scss';
+@import "@/assets/style/swiper.scss";
 
 @font-face {
   font-family: "geometria";
@@ -300,10 +358,10 @@ body {
       width: 100% !important;
       margin: 0 50px !important;
     }
-    .other-info{
+    .other-info {
       display: none;
     }
-    .other-button{
+    .other-button {
       margin: 25px 0;
       padding: 0;
     }
@@ -337,6 +395,24 @@ body {
   text-align: left !important;
   margin: 0 !important;
   line-height: 10px !important;
+  @media (max-width: 768px) {
+    display: none !important;
+    &-prev{
+      display: block !important;
+      position: absolute;
+      top: 5%;
+    }
+    &-next{
+      display: block !important;
+      position: absolute;
+      bottom: 20%;
+    }
+    &-afternext{
+      display: block !important;
+      position: absolute;
+      bottom: 0;
+    }
+  }
 }
 
 .swiper-container-vertical
@@ -361,7 +437,7 @@ body {
   @media (max-width: 768px) {
     left: 25px !important;
     height: 63% !important;
-    top: 290px !important;
+    // top: 30% !important;
   }
 }
 

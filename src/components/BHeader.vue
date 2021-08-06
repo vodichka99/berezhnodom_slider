@@ -77,7 +77,7 @@ button.request-button {
   position: absolute;
   top: 40px;
   width: 100%;
-  z-index: 10;
+  z-index: 15;
   display: flex;
   align-items: center;
   @media (max-width: 768px) {
@@ -120,7 +120,7 @@ button.request-button {
       top: 0;
       left: 0;
       background: white;
-      z-index: 10;
+      z-index: 15;
       flex-direction: column;
       align-items: center;
       text-align: center;

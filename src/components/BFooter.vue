@@ -1,7 +1,7 @@
 <template>
-  <footer class="footer">
+  <footer class="footer" :class="{'d-grid': showFilter}">
     <span class="footer-title">Параметры</span>
-    <div class="button-close">
+    <div class="button-close" :class="{'d-block': showFilter}" @click="showFilter = false">
       <img src="@/assets/icons/close-icon.svg" alt="" />
     </div>
 
@@ -66,7 +66,7 @@
       />
     </div>
   </footer>
-  <button class="button-to-filter">
+  <button class="button-to-filter" @click="showFilter = true">
     ПОДОБРАТЬ ПРОЕКТЫ ПО параметрам
     <img src="@/assets/icons/arrow-right-dark.svg" alt="" />
   </button>
@@ -87,7 +87,7 @@ export default {
   background: white;
   position: absolute;
   bottom: 0;
-  z-index: 15;
+  z-index: 10;
   text-transform: uppercase;
   font-weight: 500;
   font-size: 11px;
@@ -315,5 +315,11 @@ export default {
     top: 20px;
     right: 20px;
   }
+}
+.d-grid{
+  display: grid;
+}
+.d-block{
+  display: block !important;
 }
 </style>

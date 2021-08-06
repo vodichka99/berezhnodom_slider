@@ -1,12 +1,12 @@
 <template>
   <div class="project-page">
+    <router-link :to="{ name: 'home' }" class="link-back">
+      <button type="button" class="button-back">
+        <img src="@/assets/icons/arrow-left.svg" alt="" />вернуться назад
+      </button>
+    </router-link>
     <div class="info-block">
       <div class="main-info">
-        <router-link :to="{ name: 'home' }">
-          <button type="button" class="button-back">
-            <img src="@/assets/icons/arrow-left.svg" alt="" />вернуться назад
-          </button>
-        </router-link>
         <h3 class="main-info-title">{{ content.name }}</h3>
         <p class="main-info-descr">{{ content.descr }}</p>
         <span class="main-info-price">{{ content.fullPrice }} ₽</span>
@@ -65,6 +65,10 @@
             </div>
           </div>
         </div>
+        <button class="to-layout-mobile" @click="inGallery = !inGallery">
+          <template v-if="inGallery"> смотреть планировку </template>
+          <template v-else> смотреть галерею </template>
+        </button>
         <button type="button" class="project-button">
           хочу такой же <img src="@/assets/icons/arrow-right.svg" alt="" />
         </button>
@@ -121,6 +125,52 @@
         </button>
       </swiper>
     </div>
+    <div class="gallery-block-mobile">
+      <swiper
+        effect="fade"
+        :grabCursor="false"
+        :centeredSlides="false"
+        :slidesPerView="1"
+        direction="horizontal"
+        :loop="false"
+        :speed="800"
+        :clickable="true"
+        mousewheel
+        :navigation="{
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }"
+        :scrollbar="{ hide: false, el: '.swiper-scrollbar' }"
+      >
+        <div class="swiper-button-prev">
+          <span class="arrow-up"
+            ><img src="@/assets/icons/arrow-up.svg" alt="<"
+          /></span>
+        </div>
+        <div class="swiper-button-next">
+          <span class="arrow-down"
+            ><img src="@/assets/icons/arrow-down.svg" alt=">"
+          /></span>
+        </div>
+        <div class="swiper-scrollbar"></div>
+        <template v-if="inGallery">
+          <swiper-slide v-for="(imagePath, index) in gallery" :key="index">
+            <div
+              class="background"
+              :style="`background-image: url(${imagePath});`"
+            ></div>
+          </swiper-slide>
+        </template>
+        <template v-else>
+          <swiper-slide v-for="(imagePath, index) in layouts" :key="index">
+            <div
+              class="background"
+              :style="`background-image: url(${imagePath});`"
+            ></div>
+          </swiper-slide>
+        </template>
+      </swiper>
+    </div>
   </div>
 </template>
 
@@ -170,6 +220,20 @@ export default {
   width: 100%;
   height: 100%;
   display: flex;
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+  }
+  .to-layout-mobile {
+    display: none;
+    @media (max-width: 768px) {
+      display: block;
+      width: 100%;
+      border: 1px solid #222222;
+      height: 54px;
+      background: none;
+      margin-bottom: 20px;
+    }
+  }
   .to-layout {
     padding: 15px;
     font-weight: 500;
@@ -187,7 +251,10 @@ export default {
     display: flex;
     align-items: center;
     cursor: pointer;
-    img{
+    @media (max-width: 768px) {
+      display: none;
+    }
+    img {
       margin-right: 15px;
     }
   }
@@ -198,6 +265,16 @@ export default {
     padding: 0 60px;
     display: grid;
     grid-template-rows: 45% 55%;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      padding: 0;
+      position: absolute;
+      top: 380px;
+      display: flex;
+      flex-direction: column;
+      height: max-content;
+    }
   }
   .parameters {
     width: 100%;
@@ -205,6 +282,10 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-sizing: border-box;
+    @media (max-width: 768px) {
+      padding: 0 25px;
+    }
     .project-button {
       padding: 18px 20px;
       background: #222222;
@@ -215,8 +296,15 @@ export default {
       color: #ffffff;
       text-transform: uppercase;
       border: none;
-      max-width: 200px;
+      width: 200px;
       cursor: pointer;
+      @media (max-width: 768px) {
+        width: 100%;
+        margin-bottom: 40px;
+        font-weight: 500;
+        font-size: 11px;
+        line-height: 20px;
+      }
       img {
         margin-left: 20px;
       }
@@ -226,6 +314,9 @@ export default {
       grid-template-columns: 50% 50%;
       grid-template-rows: repeat(3, 1fr);
       height: 60%;
+      @media (max-width: 768px) {
+        height: 250px;
+      }
       &-item {
         display: flex;
         img {
@@ -257,29 +348,23 @@ export default {
       line-height: 20px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
+      @media (max-width: 768px) {
+        margin-top: 25px;
+        margin-bottom: 25px;
+      }
     }
   }
   .main-info {
     width: 100%;
     border-bottom: 1px solid #c4c4c4;
     padding-top: 60px;
-    margin-bottom: 40px;
     min-height: min-content;
-    .button-back {
-      background: none;
-      border: none;
-      font-weight: 500;
-      font-size: 11px;
-      line-height: 20px;
-      letter-spacing: 0.1em;
-      display: flex;
-      align-items: center;
-      text-transform: uppercase;
-      cursor: pointer;
-      img {
-        margin-right: 25px;
-      }
+    box-sizing: border-box;
+    @media (max-width: 768px) {
+      padding: 25px;
+      padding-top: 40px !important;
     }
+
     &-title {
       font-weight: 700;
       font-size: 64px;
@@ -300,6 +385,9 @@ export default {
       text-transform: uppercase;
       margin-top: 40px;
       display: block;
+      // @media (max-width: 768px) {
+      //   margin-bottom: 20px;
+      // }
     }
   }
 }
@@ -307,5 +395,55 @@ export default {
   width: 60%;
   height: 100%;
   background: grey;
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+.gallery-block-mobile {
+  width: 60%;
+  height: 100%;
+  background: grey;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 11px;
+  @media (max-width: 768px) {
+    width: 100%;
+    position: absolute;
+    top: 72px;
+    height: 340px;
+    display: block;
+    .swiper-scrollbar {
+      height: 2px !important;
+      bottom: 30px;
+      width: 80%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}
+.button-back {
+  background: none;
+  border: none;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 20px;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  img {
+    margin-right: 25px;
+  }
+}
+.link-back {
+  position: absolute;
+  top: 40px;
+  left: 60px;
+  @media (max-width: 768px) {
+    top: 25px;
+    left: 25px;
+  }
 }
 </style>
