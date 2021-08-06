@@ -400,13 +400,14 @@ export default {
   }
 }
 .gallery-block-mobile {
-  width: 60%;
-  height: 100%;
-  background: grey;
-  text-transform: uppercase;
-  font-weight: 500;
-  font-size: 11px;
+  display: none;
   @media (max-width: 768px) {
+    width: 60%;
+    height: 100%;
+    background: grey;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 11px;
     width: 100%;
     position: absolute;
     top: 72px;

@@ -134,11 +134,6 @@ SwiperCore.use([
 ]);
 
 export default {
-  props: {
-    mobile: {
-      type: Boolean,
-    },
-  },
   components: {
     Swiper,
     SwiperSlide,
