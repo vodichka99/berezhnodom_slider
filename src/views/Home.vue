@@ -47,7 +47,7 @@
       :data-title="content.name"
       :key="index"
     >
-      <div class="darknes">
+      <div class="darkness">
         <div
           class="background"
           :style="`background-image: url(${content.background});`"
@@ -399,10 +399,10 @@ body {
   height: 100%;
 }
 
-.darknes {
+.darkness {
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 100;
 }
 .background {

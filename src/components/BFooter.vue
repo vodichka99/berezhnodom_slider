@@ -33,22 +33,22 @@
     </div>
     <div class="footer-floors footer-item">
       <span class="footer-item-title">Этажей</span>
-      <div class="footer-item-checkboxes">
-        <div class="checkbox-wrapper" v-for="num in 3" :key="num">
+      <div class="footer-item-checkboxes footer-item-checkboxes-floors">
+        <div class="checkbox-wrapper" v-for="num in 2" :key="num">
           <input type="checkbox" name="floors" /> {{ num }}
         </div>
       </div>
     </div>
     <div class="footer-bedrooms footer-item">
       <span class="footer-item-title">Спален</span>
-      <div class="footer-item-checkboxes wrapper-1">
+      <div class="footer-item-checkboxes footer-item-checkboxes-bedrooms wrapper-1">
         <div class="checkbox-wrapper" v-for="num in 3" :key="num">
-          <input type="checkbox" name="bedrooms" /> {{ num }}
+          <input type="checkbox" name="bedrooms" /> {{ num + 2 }} <template v-if="num == 3">+</template>
         </div>
       </div>
       <div class="footer-item-checkboxes wrapper-2">
-        <div class="checkbox-wrapper" v-for="num in 4" :key="num">
-          <input type="checkbox" name="bedrooms" /> {{ num }}
+        <div class="checkbox-wrapper" v-for="num in 3" :key="num">
+          <input type="checkbox" name="bedrooms" /> {{ num + 2 }} <template v-if="num == 3">+</template>
         </div>
       </div>
     </div>
@@ -126,7 +126,7 @@ export default {
     &-item {
       &-checkboxes {
         display: grid !important;
-        grid-template-columns: repeat(4, 25%);
+        grid-template-columns: repeat(3, 25%);
       }
       &-title {
         // margin-bottom: 20px;
@@ -279,10 +279,15 @@ export default {
         top: 0;
       }
     }
+    
     &-checkboxes {
       width: 80%;
       display: flex;
       justify-content: space-between;
+      &-floors{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr) !important;
+      }
       @media (max-width: 768px) {
         width: 100%;
       }
@@ -291,6 +296,7 @@ export default {
       display: flex;
       align-items: center;
       margin-bottom: 12px;
+      
       input {
         width: 16px;
         height: 16px;

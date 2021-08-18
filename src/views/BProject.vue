@@ -1,4 +1,25 @@
 <template>
+  <div class="request-modal-background" v-show="modalActive"></div>
+  <div class="request-modal" v-show="modalActive">
+    <div class="request-modal-close" @click="modalActive = false">
+      <img src="@/assets/icons/close-icon.svg" alt="" />
+    </div>
+    <span class="request-modal-title">Заказать звонок</span>
+    <input
+      class="request-modal-phone request-modal-input"
+      placeholder="НОМЕР ТЕЛЕФОНА"
+    />
+    <input
+      type="email"
+      class="request-modal-email request-modal-input"
+      placeholder="ЭЛЕКТРОННАЯ ПОЧТА"
+    />
+    <textarea
+      class="request-modal-text request-modal-input"
+      placeholder="СООБЩЕНИЕ"
+    ></textarea>
+    <button class="request-modal-button">Заказать звонок</button>
+  </div>
   <div class="project-page">
     <router-link :to="{ name: 'home' }" class="link-back">
       <button type="button" class="button-back">
@@ -69,7 +90,7 @@
           <template v-if="inGallery"> смотреть планировку </template>
           <template v-else> смотреть галерею </template>
         </button>
-        <button type="button" class="project-button">
+        <button type="button" class="project-button" @click="modalActive = true">
           хочу такой же <img src="@/assets/icons/arrow-right.svg" alt="" />
         </button>
       </div>
@@ -202,6 +223,7 @@ export default {
       gallery: this.getContent().gallery,
       layouts: this.getContent().layout,
       inGallery: true,
+      modalActive: false
     };
   },
   methods: {
@@ -242,7 +264,7 @@ export default {
     letter-spacing: 0.1em;
     color: #ffffff;
     position: absolute;
-    right: 60px;
+    left: 60px;
     bottom: 60px;
     z-index: 10;
     background: none;
@@ -251,6 +273,8 @@ export default {
     display: flex;
     align-items: center;
     cursor: pointer;
+    box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.1);
     @media (max-width: 768px) {
       display: none;
     }
@@ -259,7 +283,7 @@ export default {
     }
   }
   .info-block {
-    width: 40%;
+    width: 25%;
     height: 100%;
     background: white;
     padding: 0 60px;
@@ -392,7 +416,7 @@ export default {
   }
 }
 .gallery-block {
-  width: 60%;
+  width: 75%;
   height: 100%;
   background: grey;
   @media (max-width: 768px) {
