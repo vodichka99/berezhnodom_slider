@@ -90,7 +90,11 @@
           <template v-if="inGallery"> смотреть планировку </template>
           <template v-else> смотреть галерею </template>
         </button>
-        <button type="button" class="project-button" @click="modalActive = true">
+        <button
+          type="button"
+          class="project-button"
+          @click="modalActive = true"
+        >
           хочу такой же <img src="@/assets/icons/arrow-right.svg" alt="" />
         </button>
       </div>
@@ -223,17 +227,13 @@ export default {
       gallery: this.getContent().gallery,
       layouts: this.getContent().layout,
       inGallery: true,
-      modalActive: false
+      modalActive: false,
     };
   },
   methods: {
     getContent() {
       return JSON.parse(localStorage.getItem("content"));
     },
-  },
-  mounted() {
-    console.log(this.content.gallery[0]);
-    console.log(this.content.layout[0]);
   },
 };
 </script>
@@ -299,6 +299,9 @@ export default {
       flex-direction: column;
       height: max-content;
     }
+    @media (max-width: 1400px) {
+      padding: 0 40px;
+    }
   }
   .parameters {
     width: 100%;
@@ -309,6 +312,9 @@ export default {
     box-sizing: border-box;
     @media (max-width: 768px) {
       padding: 0 25px;
+    }
+    @media (max-width: 1400px) {
+      padding-bottom: 40px;
     }
     .project-button {
       padding: 18px 20px;
@@ -347,6 +353,9 @@ export default {
           margin-right: 20px;
           width: 40px;
           height: 40px;
+          @media (max-width: 1400px) {
+            margin-right: 10px;
+          }
         }
       }
       &-text {
@@ -359,11 +368,20 @@ export default {
         font-size: 24px;
         margin-top: -5px;
         margin-bottom: 3px;
+        @media (max-width: 1400px) {
+          font-size: 16px;
+        }
+        @media (max-width: 1024px) {
+          font-size: 14px;
+        }
       }
       &-parameter {
         font-weight: 500;
         font-size: 10px;
         text-transform: uppercase;
+        @media (max-width: 1400px) {
+          font-size: 8px;
+        }
       }
     }
     &-title {
@@ -388,12 +406,22 @@ export default {
       padding: 25px;
       padding-top: 40px !important;
     }
-
+    @media (max-width: 1400px) {
+      padding-top: 40px !important;
+    }
     &-title {
       font-weight: 700;
       font-size: 64px;
       line-height: 30px;
       margin: 40px 0;
+      @media (max-width: 1400px) {
+        font-size: 46px;
+        margin: 25px 0;
+      }
+      @media (max-width: 1024px) {
+        font-size: 38px;
+        margin: 25px 0;
+      }
     }
     &-descr {
       font-weight: bold;
@@ -401,6 +429,15 @@ export default {
       line-height: 30px;
       display: block;
       width: 90%;
+      @media (max-width: 1400px) {
+        line-height: 24px;
+        font-size: 14px;
+        margin: 25px 0;
+      }
+      @media (max-width: 1024px) {
+        line-height: 24px;
+        font-size: 12px;
+      }
     }
     &-price {
       font-weight: bold;
@@ -409,9 +446,12 @@ export default {
       text-transform: uppercase;
       margin-top: 40px;
       display: block;
-      // @media (max-width: 768px) {
-      //   margin-bottom: 20px;
-      // }
+      @media (max-width: 1400px) {
+        margin-top: 25px;
+      }
+      @media (max-width: 1024px) {
+        font-size: 30px;
+      }
     }
   }
 }
@@ -467,8 +507,11 @@ export default {
   top: 40px;
   left: 60px;
   @media (max-width: 768px) {
-    top: 25px;
     left: 25px;
+  }
+  @media (max-width: 1400px) {
+    top: 25px;
+    left: 40px;
   }
 }
 </style>

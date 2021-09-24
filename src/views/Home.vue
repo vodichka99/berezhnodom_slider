@@ -6,12 +6,23 @@
       <img src="@/assets/icons/close-icon.svg" alt="" />
     </div>
     <span class="request-modal-title">Заказать звонок</span>
-    <input class="request-modal-phone request-modal-input" placeholder="НОМЕР ТЕЛЕФОНА" />
-    <input type="email" class="request-modal-email request-modal-input" placeholder="ЭЛЕКТРОННАЯ ПОЧТА" />
-    <textarea class="request-modal-text request-modal-input" placeholder="СООБЩЕНИЕ"></textarea>
+    <input
+      class="request-modal-phone request-modal-input"
+      placeholder="НОМЕР ТЕЛЕФОНА"
+    />
+    <input
+      type="email"
+      class="request-modal-email request-modal-input"
+      placeholder="ЭЛЕКТРОННАЯ ПОЧТА"
+    />
+    <textarea
+      class="request-modal-text request-modal-input"
+      placeholder="СООБЩЕНИЕ"
+    ></textarea>
     <button class="request-modal-button">Заказать звонок</button>
   </div>
   <swiper
+    v-if="slidesContent"
     effect="fade"
     :grabCursor="false"
     :centeredSlides="false"
@@ -155,25 +166,27 @@ export default {
   },
   data() {
     return {
-      slidesContent: this.$store.state.projectsContent,
+      // slidesContent: this.$store.state.projectsContent,
       hovered: false,
       mobileScreen: false,
-      modalActive: false
+      modalActive: false,
+      swiper: null,
     };
   },
   methods: {
     closeModal() {
-      this.modalActive = false
+      this.modalActive = false;
       console.log(this.modalActive);
     },
     openModal() {
-      this.modalActive = true
+      this.modalActive = true;
       console.log(this.modalActive);
     },
     saveContent(content) {
       localStorage.setItem("content", JSON.stringify(content));
     },
     onSwiper(swiper) {
+      this.swiper = swiper;
       const bullets = swiper.pagination.bullets;
       bullets.forEach((item, index) => {
         const prevBulletIndex = index > 0 ? index - 1 : bullets.length - 1;
@@ -200,16 +213,16 @@ export default {
         const nextBulletIndex = index < bullets.length - 1 ? index + 1 : 0;
         const afterNextBulletIndex =
           nextBulletIndex < bullets.length - 1 ? nextBulletIndex + 1 : 0;
-        if(index != prevBulletIndex){
-          item.classList.remove('swiper-pagination-bullet-prev')
+        if (index != prevBulletIndex) {
+          item.classList.remove("swiper-pagination-bullet-prev");
         }
-        if(index != nextBulletIndex){
-          item.classList.remove('swiper-pagination-bullet-next')
+        if (index != nextBulletIndex) {
+          item.classList.remove("swiper-pagination-bullet-next");
         }
-        if(index != afterNextBulletIndex){
-          item.classList.remove('swiper-pagination-bullet-afternext')
+        if (index != afterNextBulletIndex) {
+          item.classList.remove("swiper-pagination-bullet-afternext");
         }
-      })
+      });
       bullets.forEach((item, index) => {
         const prevBulletIndex = index > 0 ? index - 1 : bullets.length - 1;
         const nextBulletIndex = index < bullets.length - 1 ? index + 1 : 0;
@@ -229,10 +242,23 @@ export default {
       });
     },
   },
+  computed: {
+    slidesContent() {
+      return this.$store.getters.getContent;
+    },
+  },
+  watch: {
+    swiper() {
+      this.swiper.pagination.bullets.forEach((item) => {
+        this.$refs.pagination.append(item);
+      });
+      this.$refs.pagination.childNodes.forEach((item, index) => {
+        item.innerHTML = this.slidesContent[index].name;
+      });
+    },
+  },
   mounted() {
-    this.$refs.pagination.childNodes.forEach((item, index) => {
-      item.innerHTML = this.slidesContent[index].name;
-    });
+    this.$store.dispatch("getProjectsContent");
   },
 };
 </script>
@@ -286,17 +312,17 @@ export default {
     background-color: black;
     opacity: 0.4;
   }
-  &-button{
+  &-button {
     width: 100%;
     height: 60px;
     background-color: #222222;
     border: none;
     color: white;
     text-transform: uppercase;
-    font-family: 'geometria';
+    font-family: "geometria";
     cursor: pointer;
   }
-  &-input{
+  &-input {
     box-sizing: border-box;
     padding-left: 25px;
     font-size: 11px;
@@ -305,24 +331,24 @@ export default {
     box-shadow: none;
   }
   &-phone,
-  &-email{
+  &-email {
     height: 60px;
-    font-family: 'geometria';
+    font-family: "geometria";
   }
-  &-text{
+  &-text {
     padding-top: 25px;
     height: 150px;
     margin-bottom: 20px;
-    font-family: 'geometria';
+    font-family: "geometria";
   }
-  &-title{
+  &-title {
     width: 100%;
     font-size: 24px;
     font-weight: 700;
     text-align: center;
     padding: 10px 0;
   }
-  &-close{
+  &-close {
     position: absolute;
     top: 25px;
     right: 25px;
@@ -483,17 +509,17 @@ body {
   line-height: 10px !important;
   @media (max-width: 768px) {
     display: none !important;
-    &-prev{
+    &-prev {
       display: block !important;
       position: absolute;
       top: 5%;
     }
-    &-next{
+    &-next {
       display: block !important;
       position: absolute;
       bottom: 20%;
     }
-    &-afternext{
+    &-afternext {
       display: block !important;
       position: absolute;
       bottom: 0;
