@@ -247,8 +247,26 @@ export default createStore({
         ]
       },
     ],
+    loading: false
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    requestStart(state) {
+      state.loading = true
+    },
+    requestSuccess(state, params) {
+      state.loading = false
+      state.projectsContent = params
+    },
+    requestFailure(state) {
+      state.loading = false
+    },
+  },
+  actions: {
+    getProjectsContent(){
+      return new Promise(
+        
+      )
+    }
+  },
   modules: {},
 });
